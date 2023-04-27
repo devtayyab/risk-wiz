@@ -1,0 +1,54 @@
+{
+  "locations": [
+    {
+      "asset_name": "Building A",
+      "business_category": "Office Buildings",
+      "lat": 51.5074,
+      "long": -0.1278,
+      "current_risk_rating" : 6,
+      "decade" : 2020,
+      "yearly_data": [
+        {
+          "year": 2005,
+          "risk_rating": 3,
+          "risk_factors": ["Sea Level Rise", "Storm Surge"]
+        },
+        {
+          "year": 2000,
+          "risk_rating": 4,
+          "risk_factors": ["Sea Level Rise", "Flood"]
+        },
+        {
+          "year": 2010,
+          "risk_rating": 5,
+          "risk_factors": ["Wildfire", "Drought"]
+        }
+      ]
+    },
+    {
+      "asset_name": "Building B",
+      "business_category": "Retail Stores",
+      "lat": 40.7128,
+      "long": -74.006,
+      "current_risk_rating" : 6,
+      "decade" : 2010,
+      "yearly_data": [
+        {
+          "year": 2000,
+          "risk_rating": 9,
+          "risk_factors": ["Heat Wave", "Drought"]
+        },
+        {
+          "year": 2010,
+          "risk_rating": 1,
+          "risk_factors": ["Lightning", "Tornado"]
+        },
+        {
+          "year": 2020,
+          "risk_rating": 4,
+          "risk_factors": ["Hurricane", "Storm Surge"]
+        }
+      ]
+    }
+  ]
+}
