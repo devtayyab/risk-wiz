@@ -1,0 +1,140 @@
+{
+  "locations": [
+    {
+      
+      "id" : 1,
+      "asset_name": "Building A",
+      "business_category": "Office Buildings",
+      "lat": 51.6074,
+      "long": -0.1268,
+      "current_risk_rating" : 50,
+      "decade" : 2020,
+      "risk_factors" : "Sea Level Rise", 
+      "yearly_data": [
+        {
+          "year": 2005,
+          "risk_rating": 10,
+          "risk_factors": ["Sea Level Rise", "Storm Surge"]
+        },
+        {
+          "year": 2000,
+          "risk_rating": 4,
+          "risk_factors": ["Sea Level Rise", "Flood"]
+        },
+        {
+          "year": 2010,
+          "risk_rating": 5,
+          "risk_factors": ["Wildfire", "Drought"]
+        }
+      ]
+    },
+    {
+      "id" : 2,
+      "asset_name": "Building B",
+      "business_category": "Office Buildings",
+      "lat": 51.5674,
+      "long": -0.298,
+      "current_risk_rating" : 70,
+      "decade" : 2030,
+      "risk_factors" : "Sea Level Rise", 
+      "yearly_data": [
+        {
+          "year": 2005,
+          "risk_rating": 3,
+          "risk_factors": ["Sea Level Rise", "Storm Surge"]
+        },
+        {
+          "year": 2000,
+          "risk_rating": 4,
+          "risk_factors": ["Sea Level Rise", "Flood"]
+        },
+        {
+          "year": 2010,
+          "risk_rating": 5,
+          "risk_factors": ["Wildfire", "Drought"]
+        }
+      ]
+    },
+    {
+      "id" : 3,
+      "asset_name": "Building C",
+      "business_category": "Office Buildings",
+      "lat": 51.5014,
+      "long": -0.3278,
+      "current_risk_rating" : 12,
+      "decade" : 1910,
+      "risk_factors" : "Sea Level Rise", 
+      "yearly_data": [
+        {
+          "year": 1920,
+          "risk_rating": 3,
+          "risk_factors": ["Sea Level Rise", "Storm Surge"]
+        },
+        {
+          "year": 1930,
+          "risk_rating": 3,
+          "risk_factors": ["Sea Level Rise", "Flood"]
+        },
+        {
+          "year": 1910,
+          "risk_rating": 3,
+          "risk_factors": ["Wildfire", "Drought"]
+        }
+      ]
+    },
+    {
+      "id" : 4,
+      "asset_name": "Building D",
+      "business_category": "Office Buildings",
+      "lat": 51.9074,
+      "long": -0.1278,
+      "current_risk_rating" : 90,
+      "decade" : 2050,
+      "risk_factors" : "Sea Level Rise", 
+      "yearly_data": [
+        {
+          "year": 2050,
+          "risk_rating": 3,
+          "risk_factors": ["Sea Level Rise", "Storm Surge"]
+        },
+        {
+          "year": 2040,
+          "risk_rating": 4,
+          "risk_factors": ["Sea Level Rise", "Flood"]
+        },
+        {
+          "year": 2030,
+          "risk_rating": 3,
+          "risk_factors": ["Wildfire", "Drought"]
+        }
+      ]
+    },
+    {
+      "id" : 5,
+      "asset_name": "Building H",
+      "business_category": "Retail Stores",
+      "lat": 40.7128,
+      "long": -74.206,
+      "current_risk_rating" : 60,
+      "decade" : 2010,
+      "risk_factors" : "Sea Level Rise", 
+      "yearly_data": [
+        {
+          "year": 2000,
+          "risk_rating": 9,
+          "risk_factors": ["Heat Wave", "Drought"]
+        },
+        {
+          "year": 2010,
+          "risk_rating": 1,
+          "risk_factors": ["Lightning", "Tornado"]
+        },
+        {
+          "year": 2020,
+          "risk_rating": 4,
+          "risk_factors": ["Hurricane", "Storm Surge"]
+        }
+      ]
+    }
+  ]
+}

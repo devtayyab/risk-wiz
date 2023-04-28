@@ -1,74 +1,24 @@
-"use client"
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-const data = [
-  {
-    id: 1,
-    lat: 39.9042,
-    long: 116.4074,
-    asset_name: 'Forbidden City',
-    business_category: 'Museum',
-    decade: 1950,
-    risk_rating: 8
-  },
-  {
-    id: 2,
-    lat: 40.7128,
-    long: -74.0060,
-    asset_name: 'Statue of Liberty',
-    business_category: 'Museum',
-    decade: 1980,
-    risk_rating: 90
-  },
-  {
-    id: 3,
-    lat: 51.5074,
-    long: -0.1278,
-    asset_name: 'Buckingham Palace',
-    business_category: 'Palace',
-    decade: 1920,
-    risk_rating: 50
-  },
-  {
-    id: 4,
-    lat: 35.6895,
-    long: 139.6917,
-    asset_name: 'Tokyo Tower',
-    business_category: 'Observatory',
-    decade: 1238,
-    risk_rating: 6
-  },
-  {
-    id: 5,
-    lat: 48.8566,
-    long: 2.3522,
-    asset_name: 'Eiffel Tower',
-    business_category: 'Observatory',
-    decade: 1970,
-    risk_rating: 40
-  },
-  {
-    id: 6,
-    lat: 41.9028,
-    long: 12.4964,
-    asset_name: 'Colosseum',
-    business_category: 'Amphitheater',
-    decade: 1970,
-    risk_rating: 34
-  },
-  // add more data as needed
-];
+import {DataContextValue, LocationData} from '../interfaces/interfaces'
+import {DataContext} from '../context/dataContext'
+interface RiskMapProps {
+  data: LocationData[];
+}
 
-export default function Home() {
+const RiskMap = ({data}: RiskMapProps) =>{
+  const {setSelectLocation} = useContext(DataContext) as DataContextValue
   const [decade, setDecade] = useState(2020);
   const mapRef = useRef(null);
 
+  const [selectedLocation, setSelectedLocation] = useState<LocationData | null | undefined>(null); // add state for storing selected location
+
   const filteredData = data.filter((item) => {
     return item.decade >= decade
-  });
+  }).map((item, index) => ({ ...item, id: index })); // add id field to each location object
 
-  window && useEffect(() => {
+ useEffect(() => {
     let map: any;
     if (mapRef.current !== null) {
 
@@ -83,15 +33,23 @@ export default function Home() {
         const lng = item.long;
         const name = item.asset_name;
         const category = item.business_category;
-        const riskRating = item.risk_rating;
+        const riskRating = item.current_risk_rating;
 
         const marker = L.circleMarker([lat, lng], {
           color: getColorFromRating(riskRating),
           fillColor: getColorFromRating(riskRating),
           fillOpacity: 1,
+          
         }).addTo(map);
 
-        marker.bindTooltip(`${name} (${category})`).openTooltip();
+        marker.bindPopup(`${name} (${category}) <br> Current risk rating: ${riskRating}`);
+
+        marker.on('click', () => {
+          const selectedId = item.id;
+          const selectedLocation = filteredData.find((location) => location.id === selectedId);
+          setSelectedLocation(selectedLocation);
+          selectedLocation &&  setSelectLocation(selectedLocation)
+        });
       });
     }
 
@@ -117,15 +75,27 @@ export default function Home() {
     const newDecade = parseInt(event.target.value, 10);
     setDecade(newDecade);
   }
+
   return (
-    <div>
-      <div ref={mapRef} style={{ height: '500px' }}></div>
-      <div>
-        <label htmlFor="decade-select">Select Decade:</label>
-        <select id="decade-select" value={decade} onChange={handleDecadeChange}>
-          {data.map((v, index) => <option key={index} value={v.decade}>{v.decade}</option>)}
-        </select>
-      </div>
+    <div className="flex flex-col md:flex-row  justify-center">
+    <div ref={mapRef} style={{ height: '500px' }} className="w-full h-96 md:w-3/4 md:h-full"></div>
+    <div className="md:w-1/4 py-4 px-2 text-center md:text-left">
+      <label htmlFor="decade-select" className="font-medium">Select Decade:</label>
+      <select id="decade-select" value={decade} onChange={handleDecadeChange} className="block w-full mt-2 mb-4 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+        {data.map((v, index) => <option key={index} value={v.decade}>{v.decade}</option>)}
+      </select>
+      {selectedLocation && (
+        <div>
+          <h2 className="font-medium">{selectedLocation.asset_name}</h2>
+          <h2 className="text-gray-600">{selectedLocation.business_category}</h2>
+          <h2 className={`font-medium ${selectedLocation.current_risk_rating < 33 ? 'text-green-500' : (selectedLocation.current_risk_rating >= 33 && selectedLocation.current_risk_rating < 66) ? 'text-yellow-500' : 'text-red-500'}`}>{`Current risk rating: ${selectedLocation.current_risk_rating}`}</h2>
+        </div>
+      )}
     </div>
+  </div>
   );
 }
+
+export default RiskMap;
+
+{/* <div ref={mapRef} style={{ height: '500px' }}></div> */}
