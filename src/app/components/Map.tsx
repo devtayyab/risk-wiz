@@ -58,7 +58,7 @@ const RiskMap = ({data}: RiskMapProps) =>{
         map.remove(); // remove the map instance when the component unmounts
       }
     }
-  }, [decade]);
+  }, [decade] );
 
 
   function getColorFromRating(rating: any) {

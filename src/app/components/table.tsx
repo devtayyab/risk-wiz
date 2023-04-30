@@ -35,10 +35,11 @@ const Table: React.FC<TableProps> = ({ columns, data, selectedrow }) => {
     <>
       <table {...getTableProps()} className="w-full border-collapse text-sm">
         <thead className="bg-gray-200 font-medium text-gray-700">
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
+          {headerGroups.map((headerGroup, index) => (
+            <tr {...headerGroup.getHeaderGroupProps()} key={index}>
+              {headerGroup.headers.map((column , index) => (
                 <th
+                key={index}
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   className="px-4 py-2 text-left"
                 >
@@ -52,17 +53,18 @@ const Table: React.FC<TableProps> = ({ columns, data, selectedrow }) => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {page.map(row => {
+          {page.map((row , index) => {
             prepareRow(row);
             const rikFactorCell = row.cells.find(cell => cell.column.id === 'id');
             const rikFactor = rikFactorCell ? rikFactorCell.value : null;
             const rowClass =
               rikFactor && selectedrow && rikFactor === selectedrow.id + 1 ? `font-medium ${selectedrow.current_risk_rating < 33 ? 'bg-green-500' : (selectedrow.current_risk_rating >= 33 && selectedrow.current_risk_rating < 66) ? 'bg-yellow-500' : 'bg-red-500'}` : '';
             return (
-              <tr {...row.getRowProps()} className={`bg-white ${rowClass}`}>
-                {row.cells.map(cell => {
+              <tr {...row.getRowProps()} className={`bg-white ${rowClass}`} key={index}>
+                {row.cells.map((cell, index) => {
                   return (
                     <td
+                    key={index}
                       {...cell.getCellProps()}
                       className="px-4 py-2 border text-gray-800 font-normal"
                     >
