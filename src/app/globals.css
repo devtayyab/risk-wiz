@@ -35,3 +35,10 @@ td {
   border: 1px solid black;
   padding: 8px;
 }
+
+.bg-green-500 {
+  background-color:  green;
+}
+.bg-red-500 {
+  background-color:  red;
+}
